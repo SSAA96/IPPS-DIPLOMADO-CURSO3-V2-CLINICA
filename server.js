@@ -4,6 +4,7 @@ import cors from 'cors'
 import { conectar } from './config/db.js'
 
 import { authRoutes } from './routes/auth.routes.js'
+import { medicoRoutes } from './routes/medico.routes.js'
 import { pacienteRoutes } from './routes/paciente.route.js'
 
 const app = express()
@@ -16,7 +17,28 @@ app.use('/auth', authRoutes)
 //http://localhost:3001/auth/registro/
 //http://localhost:3001/auth/login/
 
+app.use('/medicos', medicoRoutes)
 app.use('/pacientes', pacienteRoutes)
+
+// Middleware de errores: en Express 5 los errores de los controllers async llegan aquí.
+// Los traducimos a su código de estado para que el servidor nunca se caiga.
+app.use((err, req, res, next) => {
+    if (err.name === 'ValidationError') {
+        return res.status(400).json({ error: err.message })
+    }
+    if (err.name === 'CastError') {
+        return res.status(400).json({ error: `Id con formato inválido: ${err.value}` })
+    }
+    if (err.code === 11000) {
+        const campo = Object.keys(err.keyValue)[0]
+        return res.status(409).json({ error: `Ya existe un registro con ese ${campo}` })
+    }
+    if (err.type === 'entity.parse.failed') {
+        return res.status(400).json({ error: 'El body no es un JSON válido' })
+    }
+    console.error(err)
+    res.status(500).json({ error: 'Error interno del servidor' })
+})
 
 await conectar()
 
