@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const pacienteSchema = new mongoose.Schema({
   nombre: { type: String, required: true, trim: true },
-  rut: { type: String, required: true, unique: true, trim: true },
+  rut: { type: String, required: true, unique: true, trim: true, uppercase: true }, // 12.345.678-k = 12.345.678-K
   fechaNacimiento: { type: Date, required: true },
   prevision: {
     type: String,
