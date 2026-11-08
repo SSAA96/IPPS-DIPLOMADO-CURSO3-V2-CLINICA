@@ -5,7 +5,7 @@ import * as controller from '../controllers/paciente.controller.js'
 
 export const pacienteRoutes = Router()
 
-pacienteRoutes.use(proteger) // 👈 de aquí abajo, todo exige token
+pacienteRoutes.use(proteger)
 
 pacienteRoutes.post('/', controller.crear)
 pacienteRoutes.get('/', controller.listar)

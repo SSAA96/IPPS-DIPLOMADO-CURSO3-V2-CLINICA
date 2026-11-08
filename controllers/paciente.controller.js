@@ -1,7 +1,6 @@
 import * as service from '../services/paciente.service.js'
 
 // Regla de negocio: solo el médico tratante modifica o elimina a su paciente.
-// paciente.medico es un ObjectId y req.medico.id un string → hay que usar toString()
 const esTratante = (paciente, req) => paciente.medico.toString() === req.medico.id
 
 // POST /pacientes → el médico tratante es el del token, se ignora el "medico" del body

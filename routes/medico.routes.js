@@ -5,9 +5,9 @@ import * as controller from '../controllers/medico.controller.js'
 
 export const medicoRoutes = Router()
 
-medicoRoutes.use(proteger) // 👈 todas exigen token
+medicoRoutes.use(proteger)
 
 medicoRoutes.get('/', controller.listar)
-medicoRoutes.get('/perfil', controller.perfil) // antes de /:id, si no "perfil" se toma como id
+medicoRoutes.get('/perfil', controller.perfil)
 medicoRoutes.get('/:id', controller.buscarPorId)
 medicoRoutes.get('/:id/pacientes', controller.pacientesDe)
