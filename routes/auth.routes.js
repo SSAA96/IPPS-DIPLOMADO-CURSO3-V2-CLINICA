@@ -7,6 +7,4 @@ export const authRoutes = Router()
 
 authRoutes.post('/registro', controller.registrar)
 
-authRoutes.post('/login', (req, res)=>{
-
-})
+authRoutes.post('/login', controller.login)
