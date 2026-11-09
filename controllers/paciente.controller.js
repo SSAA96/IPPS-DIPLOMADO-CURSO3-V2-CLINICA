@@ -1,8 +1,5 @@
 import * as service from '../services/paciente.service.js'
 
-// Regla de negocio: solo el médico tratante modifica o elimina a su paciente.
-const esTratante = (paciente, req) => paciente.medico.toString() === req.medico.id
-
 // POST /pacientes → el médico tratante es el del token, se ignora el "medico" del body
 export const crear = async (req, res) => {
     const { medico, ...datos } = req.body ?? {}
@@ -23,11 +20,11 @@ export const buscarPorId = async (req, res) => {
     res.json(paciente)
 }
 
-// PUT /pacientes/:id → solo el médico tratante
+// PUT /pacientes/:id → solo el médico tratante (la regla está en el service)
 export const actualizar = async (req, res) => {
     const paciente = await service.buscarPorId(req.params.id)
     if (!paciente) return res.status(404).json({ error: `No existe el paciente ${req.params.id}` })
-    if (!esTratante(paciente, req)) {
+    if (!service.esTratante(paciente, req.medico.id)) {
         return res.status(403).json({ error: 'Solo el médico tratante puede modificar a este paciente' })
     }
 
@@ -40,7 +37,7 @@ export const actualizar = async (req, res) => {
 export const eliminar = async (req, res) => {
     const paciente = await service.buscarPorId(req.params.id)
     if (!paciente) return res.status(404).json({ error: `No existe el paciente ${req.params.id}` })
-    if (!esTratante(paciente, req)) {
+    if (!service.esTratante(paciente, req.medico.id)) {
         return res.status(403).json({ error: 'Solo el médico tratante puede eliminar a este paciente' })
     }
 
