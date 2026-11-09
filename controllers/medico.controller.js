@@ -13,7 +13,7 @@ export const perfil = async (req, res) => {
     res.json(medico)
 }
 
-// GET /medicos/:id  (id con mal formato → 400 en el middleware validarObjectId)
+// GET /medicos/:id  (id con mal formato → 400 en validarObjectId)
 export const buscarPorId = async (req, res) => {
     const medico = await service.buscarPorId(req.params.id)
     if (!medico) return res.status(404).json({ error: `No existe el médico ${req.params.id}` })
