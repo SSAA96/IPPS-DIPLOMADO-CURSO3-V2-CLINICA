@@ -11,7 +11,6 @@ export const listar = (medicoId, prevision) => {
 export const buscarPorId = (id) => Paciente.findById(id)
 
 // Regla de negocio: solo el médico tratante puede modificar o eliminar a su paciente.
-// paciente.medico es un ObjectId y medicoId (del token) un string → hay que usar toString()
 export const esTratante = (paciente, medicoId) => paciente.medico.toString() === medicoId
 
 export const actualizar = (paciente, datos) => {

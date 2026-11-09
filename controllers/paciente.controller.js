@@ -20,7 +20,7 @@ export const buscarPorId = async (req, res) => {
     res.json(paciente)
 }
 
-// PUT /pacientes/:id → solo el médico tratante (la regla está en el service)
+// PUT /pacientes/:id → solo el médico tratante
 export const actualizar = async (req, res) => {
     const paciente = await service.buscarPorId(req.params.id)
     if (!paciente) return res.status(404).json({ error: `No existe el paciente ${req.params.id}` })
