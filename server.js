@@ -6,7 +6,7 @@ import { conectar } from './config/db.js'
 
 import { authRoutes } from './routes/auth.routes.js'
 import { medicoRoutes } from './routes/medico.routes.js'
-import { pacienteRoutes } from './routes/paciente.route.js'
+import { pacienteRoutes } from './routes/paciente.routes.js'
 
 import { manejarErrores } from './middlewares/manejarErrores.js'
 
