@@ -12,7 +12,7 @@ export const login = async (req, res)=>{
         return res.status(400).json({ error: 'Debes enviar email y password' })
     }
 
-    const resultado = await service.login(email.toLowerCase(), password)
+    const resultado = await service.login(email, password)
     if (!resultado) {
         return res.status(401).json({ error: 'Email o contraseña incorrectos' })
     }
