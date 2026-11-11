@@ -2,8 +2,7 @@ import * as service from '../services/paciente.service.js'
 
 // POST /pacientes → el médico tratante es el del token, se ignora el "medico" del body
 export const crear = async (req, res) => {
-    const { medico, ...datos } = req.body ?? {}
-    const paciente = await service.crear({ ...datos, medico: req.medico.id })
+    const paciente = await service.crear(req.body ?? {}, req.medico.id)
     res.status(201).json(paciente)
 }
 
@@ -28,8 +27,7 @@ export const actualizar = async (req, res) => {
         return res.status(403).json({ error: 'Solo el médico tratante puede modificar a este paciente' })
     }
 
-    const { medico, ...datos } = req.body ?? {}
-    const actualizado = await service.actualizar(paciente, datos)
+    const actualizado = await service.actualizar(paciente, req.body ?? {})
     res.json(actualizado)
 }
 

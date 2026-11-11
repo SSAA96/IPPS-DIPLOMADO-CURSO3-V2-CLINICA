@@ -24,7 +24,7 @@ export const registrar = async ( datos ) =>{
 
 
 export const login = async (email, password) =>{
-    const medico = await Medico.findOne({ email })
+    const medico = await Medico.findOne({ email: email.toLowerCase() })
     if(!medico) return null
 
     const ok = await medico.compararPassword(password)

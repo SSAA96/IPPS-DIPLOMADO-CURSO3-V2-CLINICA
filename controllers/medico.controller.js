@@ -1,4 +1,5 @@
 import * as service from '../services/medico.service.js'
+import * as pacienteService from '../services/paciente.service.js'
 
 // GET /medicos  y  GET /medicos?especialidad=Pediatría
 export const listar = async (req, res) => {
@@ -25,6 +26,6 @@ export const pacientesDe = async (req, res) => {
     const medico = await service.buscarPorId(req.params.id)
     if (!medico) return res.status(404).json({ error: `No existe el médico ${req.params.id}` })
 
-    const pacientes = await service.pacientesDe(req.params.id)
+    const pacientes = await pacienteService.listar(req.params.id)
     res.json(pacientes)
 }
