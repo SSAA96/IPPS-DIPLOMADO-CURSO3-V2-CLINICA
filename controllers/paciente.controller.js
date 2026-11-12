@@ -12,10 +12,13 @@ export const listar = async (req, res) => {
     res.json(pacientes)
 }
 
-// GET /pacientes/:id → cualquier médico puede verlo
+// GET /pacientes/:id → solo el médico tratante
 export const buscarPorId = async (req, res) => {
     const paciente = await service.buscarPorId(req.params.id)
     if (!paciente) return res.status(404).json({ error: `No existe el paciente ${req.params.id}` })
+    if (!service.esTratante(paciente, req.medico.id)) {
+        return res.status(403).json({ error: 'Solo el médico tratante puede ver a este paciente' })
+    }
     res.json(paciente)
 }
 

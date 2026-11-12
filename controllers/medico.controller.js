@@ -21,10 +21,14 @@ export const buscarPorId = async (req, res) => {
     res.json(medico)
 }
 
-// GET /medicos/:id/pacientes → [] si no tiene pacientes, 404 si el médico no existe
+// GET /medicos/:id/pacientes → [] si no tiene pacientes, 404 si el médico no existe,
+// 403 si el médico del token no es el consultado
 export const pacientesDe = async (req, res) => {
     const medico = await service.buscarPorId(req.params.id)
     if (!medico) return res.status(404).json({ error: `No existe el médico ${req.params.id}` })
+    if (req.params.id !== req.medico.id) {
+        return res.status(403).json({ error: 'Solo puedes ver tus propios pacientes' })
+    }
 
     const pacientes = await pacienteService.listar(req.params.id)
     res.json(pacientes)
