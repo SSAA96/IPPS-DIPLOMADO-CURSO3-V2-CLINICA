@@ -6,7 +6,7 @@ API REST con Node, Express y MongoDB (Mongoose) para médicos y pacientes, prote
 
 ## Video
 
-Enlace: _PENDIENTE — pegar aquí el enlace de YouTube_
+Enlace: https://drive.google.com/file/d/1ASNW47cMeXpeaW8ccVKENCu3K4Qn73qL/view?usp=drive_link
 
 ## Cómo levantarlo
 
