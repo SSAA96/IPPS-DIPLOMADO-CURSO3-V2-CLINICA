@@ -6,7 +6,11 @@ API REST con Node, Express y MongoDB (Mongoose) para médicos y pacientes, prote
 
 ## Video
 
-Enlace: _PENDIENTE — pegar aquí el enlace de YouTube_
+[Ver video 01 - Errores Iniciales en Google Drive](https://drive.google.com/file/d/1kOz3NunSPnV1JfzJ6BJcxq69HOEUNaJ7/view?usp=drive_link) 
+
+[Ver video 02 - Explicación de Middlewares en  Google Drive](https://drive.google.com/file/d/1l9O4LfZ9Af9vPr1ALh_fE-mDKkAWRTho/view?usp=drive_link) 
+
+[Ver video 03 - Explicación de bycript y flujo en Google Drive](https://drive.google.com/file/d/1uokK81kNa8kQd7I7Q_0Udy0fM3mZ8OQp/view?usp=drive_link) 
 
 ## Cómo levantarlo
 

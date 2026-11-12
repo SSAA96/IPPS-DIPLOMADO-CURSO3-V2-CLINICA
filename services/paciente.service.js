@@ -1,6 +1,10 @@
 import { Paciente } from '../models/paciente.model.js'
 
-export const crear = (datos) => Paciente.create(datos)
+// El médico tratante siempre es el del token: se ignora el "medico" que venga en los datos
+export const crear = (datos, medicoId) => {
+    const { medico, ...resto } = datos
+    return Paciente.create({ ...resto, medico: medicoId })
+}
 
 export const listar = (medicoId, prevision) => {
     const filtro = { medico: medicoId }
@@ -14,7 +18,8 @@ export const buscarPorId = (id) => Paciente.findById(id)
 export const esTratante = (paciente, medicoId) => paciente.medico.toString() === medicoId
 
 export const actualizar = (paciente, datos) => {
-    paciente.set(datos)
+    const { medico, ...resto } = datos
+    paciente.set(resto)
     return paciente.save()
 }
 
